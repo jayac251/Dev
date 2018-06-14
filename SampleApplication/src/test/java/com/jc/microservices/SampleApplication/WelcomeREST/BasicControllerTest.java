@@ -1,5 +1,6 @@
 package com.jc.microservices.SampleApplication.WelcomeREST;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,7 +30,18 @@ public class BasicControllerTest {
 
 		mvc.perform(req)
 		.andExpect(status().isOk())
-		.andExpect(content().string(equalTo("Hello JC!!")));	
+		.andExpect(content().string(equalTo("Hello JC!")));	
+	}
+	
+	@Test
+	public void welcomeObj() throws Exception
+	{
+		MockHttpServletRequestBuilder req= MockMvcRequestBuilders.get("/welcomeBean")
+				.accept(MediaType.APPLICATION_JSON);
+
+		mvc.perform(req)
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("Hello from Bean")));	
 	}
 	
 

@@ -9,4 +9,9 @@ public class BasicController {
 	public String Welcome() {
 		return "Hello JC!";
 	}
+	
+	@GetMapping("/welcomeBean")
+	public WelcomeBean WelcomewithObj() {
+		return new WelcomeBean("Hello from Bean");
+	}
 }
