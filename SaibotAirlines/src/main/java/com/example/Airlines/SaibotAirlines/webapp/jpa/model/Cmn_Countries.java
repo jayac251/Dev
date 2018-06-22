@@ -126,7 +126,7 @@ public class Cmn_Countries {
 		this.flag = flag;
 	}
 
-	@OneToMany(mappedBy = "Cmn_Countries", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cmn_countries", cascade = CascadeType.ALL)
 	public Set<Cmn_Airports> getCmn_airports() {
 		return cmn_airports;
 	}
