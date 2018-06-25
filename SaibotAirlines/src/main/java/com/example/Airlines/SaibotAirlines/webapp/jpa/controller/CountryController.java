@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,13 +31,20 @@ public class CountryController {
 	}
 	
 	@PostMapping("/countries")
-	public ResponseEntity<Object> createStudent(@RequestBody Cmn_Countries country) {
+	public ResponseEntity<Object> createCountry(@RequestBody Cmn_Countries country) {
 		Cmn_Countries countries = cntryRepo.save(country);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(countries.getId()).toUri();
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//				.buildAndExpand(countries.getId()).toUri();
+//
+//		return ResponseEntity.created(location).build();
+		
+		if (countries==null)
+		{
+			return ResponseEntity.noContent().build();
+		}
 
-		return ResponseEntity.created(location).build();
+				return (ResponseEntity<Object>) ResponseEntity.status(HttpStatus.CREATED);
 
 	}
 

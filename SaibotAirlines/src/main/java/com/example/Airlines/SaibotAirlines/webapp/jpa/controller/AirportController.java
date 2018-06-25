@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,13 +30,14 @@ public class AirportController {
 	}
 	
 	@PostMapping("/airports")
-	public ResponseEntity<Object> createStudent(@RequestBody Cmn_Airports airport) {
+	public ResponseEntity<Object> createAirport(@RequestBody Cmn_Airports airport) {
 		Cmn_Airports airports = airRepo.save(airport);
+		if (airport==null)
+		{
+			return ResponseEntity.noContent().build();
+		}
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(airports.getId()).toUri();
-
-		return ResponseEntity.created(location).build();
+				return (ResponseEntity<Object>) ResponseEntity.status(HttpStatus.CREATED);
 
 	}
 

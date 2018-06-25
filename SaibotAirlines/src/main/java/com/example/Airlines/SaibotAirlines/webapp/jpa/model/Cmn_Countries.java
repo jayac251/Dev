@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * 
@@ -26,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Cmn_Countries {
 	
 	private Integer id;
@@ -64,7 +68,9 @@ public class Cmn_Countries {
 	 * @return the id
 	 */
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ2")
+    @SequenceGenerator(name="SEQ2", sequenceName="SEQ2", initialValue=5,allocationSize=100)
+	
 	public Integer getId() {
 		return id;
 	}
@@ -133,7 +139,7 @@ public class Cmn_Countries {
 	}
 
 	@OneToMany(mappedBy = "cmn_countries", cascade = CascadeType.ALL)
-	@JsonBackReference
+//	@JsonBackReference
 	public Set<Cmn_Airports> getCmn_airports() {
 		return cmn_airports;
 	}

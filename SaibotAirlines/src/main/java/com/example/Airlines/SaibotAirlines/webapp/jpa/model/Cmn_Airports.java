@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @author Spring User
@@ -29,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  *
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Cmn_Airports {
 	private Integer id;
 	private String iata_code;
@@ -72,7 +76,8 @@ public class Cmn_Airports {
 	 * @return the id
 	 */
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ1")
+    @SequenceGenerator(name="SEQ1", sequenceName="SEQ1", initialValue=5, allocationSize=100)
 	public Integer getId() {
 		return id;
 	}
@@ -170,7 +175,7 @@ public class Cmn_Airports {
 	}
 
 @ManyToOne
-@JsonManagedReference
+//@JsonManagedReference
 @JoinColumn(name="id",insertable = false, updatable = false )
 	public Cmn_Countries getCmn_countries() {
 		return cmn_countries;
