@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author Spring User
  * CREATE TABLE SAIBOT.CMN_AIRPORTS 
@@ -28,18 +30,19 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Cmn_Airports {
-	private int id;
+	private Integer id;
 	private String iata_code;
 	private String icao_code;
 	private String name;
-	//private int cty_id;
+	//private Integer cty_id;
 	private String city;
-	private int longitude;
-	private int latitude;
-	private int utc_offset;
+	private Integer longitude;
+	private Integer lattitude;
+	private Integer utc_offset;
 	private Cmn_Countries cmn_countries;
 	
-	
+	public Cmn_Airports()
+	{}
 	
 	/**
 	 * @param id
@@ -52,8 +55,8 @@ public class Cmn_Airports {
 	 * @param utc_offset
 	 * @param cmn_countries
 	 */
-	public Cmn_Airports(int id, String iata_code, String icao_code, String name, String city, int longitude,
-			int latitude, int utc_offset, Cmn_Countries cmn_countries) {
+	public Cmn_Airports(Integer id, String iata_code, String icao_code, String name, String city, Integer longitude,
+			Integer latitude, Integer utc_offset, Cmn_Countries cmn_countries) {
 		super();
 		this.id = id;
 		this.iata_code = iata_code;
@@ -61,7 +64,7 @@ public class Cmn_Airports {
 		this.name = name;
 		this.city = city;
 		this.longitude = longitude;
-		this.latitude = latitude;
+		this.lattitude = latitude;
 		this.utc_offset = utc_offset;
 		this.cmn_countries = cmn_countries;
 	}
@@ -70,13 +73,13 @@ public class Cmn_Airports {
 	 */
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
@@ -132,41 +135,42 @@ public class Cmn_Airports {
 	/**
 	 * @return the longitude
 	 */
-	public int getLongitude() {
+	public Integer getLongitude() {
 		return longitude;
 	}
 	/**
 	 * @param longitude the longitude to set
 	 */
-	public void setLongitude(int longitude) {
+	public void setLongitude(Integer longitude) {
 		this.longitude = longitude;
 	}
 	/**
 	 * @return the latitude
 	 */
-	public int getLatitude() {
-		return latitude;
+	public Integer getLattitude() {
+		return lattitude;
 	}
 	/**
 	 * @param latitude the latitude to set
 	 */
-	public void setLatitude(int latitude) {
-		this.latitude = latitude;
+	public void setLattitude(Integer latitude) {
+		this.lattitude = latitude;
 	}
 	/**
 	 * @return the utc_offset
 	 */
-	public int getUtc_offset() {
+	public Integer getUtc_offset() {
 		return utc_offset;
 	}
 	/**
 	 * @param utc_offset the utc_offset to set
 	 */
-	public void setUtc_offset(int utc_offset) {
+	public void setUtc_offset(Integer utc_offset) {
 		this.utc_offset = utc_offset;
 	}
 
 @ManyToOne
+@JsonManagedReference
 @JoinColumn(name="id",insertable = false, updatable = false )
 	public Cmn_Countries getCmn_countries() {
 		return cmn_countries;

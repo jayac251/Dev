@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * 
  * @author Spring User
@@ -26,7 +28,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cmn_Countries {
 	
-	private int id;
+	private Integer id;
 	private String code;	
 	private String name;
 	private String tailcode;
@@ -43,7 +45,11 @@ public class Cmn_Countries {
 	 * @param flag
 	 * @param cmn_airports
 	 */
-	public Cmn_Countries(int id, String code, String name, String tailcode, String flag,
+	
+	public Cmn_Countries()
+	{}
+	
+	public Cmn_Countries(Integer id, String code, String name, String tailcode, String flag,
 			Set<Cmn_Airports> cmn_airports) {
 		super();
 		this.id = id;
@@ -59,14 +65,14 @@ public class Cmn_Countries {
 	 */
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -127,6 +133,7 @@ public class Cmn_Countries {
 	}
 
 	@OneToMany(mappedBy = "cmn_countries", cascade = CascadeType.ALL)
+	@JsonBackReference
 	public Set<Cmn_Airports> getCmn_airports() {
 		return cmn_airports;
 	}
