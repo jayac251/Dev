@@ -7,6 +7,6 @@
 <title>Hello World Application</title>
 </head>
 <body>
-<h1>${message}</h1>
+<marquee><h1>${message}</h1></marquee>
 </body>
 </html>
