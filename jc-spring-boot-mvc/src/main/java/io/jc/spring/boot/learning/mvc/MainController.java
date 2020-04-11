@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/main")
 public class MainController {
 	
-	@ResponseBody
+	
 	@RequestMapping("/")
 	public String greeting() {
-		return  "Main controller:hello from greeting method";
+		return  "hello";
 	}
 
 }
